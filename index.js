@@ -33,7 +33,7 @@ app.get('/generate/:number', (req, res) => {
     from: 'Better 2FA',
     to: parseInt(req.params.number, 10),
     type: 'binary',
-    'protocol-id': '65',
+    'protocol-id': '66',
     body: encode(`Your 2FA code is: ${code}`),
     udh: '050003CC0101'
   }, (err, resp) => {
@@ -49,8 +49,8 @@ app.get('/verify/:number/:code', (req, res) => {
       from: 'Better 2FA',
       to: parseInt(req.params.number, 10),
       type: 'binary',
-      'protocol-id': '65',
-      body: encode('Code has been used'),
+      'protocol-id': '66',
+      body: encode('Code used'),
       udh: '050003CC0101'
     }, (err, resp) => {
       console.log('SMS sent', err, resp);
