@@ -27,7 +27,6 @@ app.get('/generate/:number', (req, res) => {
     type: 'binary',
     'protocol-id': '65',
     body: encode(`Your 2FA code is: ${code}`),
-    // body: '',
     udh: '050003CC0101'
   }, (err, resp) => {
     console.log('SMS sent', err, resp);
