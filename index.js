@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const rateLimit = require("express-rate-limit");
-const { encode } = require('@averagemarcus/sms-binary');
+const { encode } = require('@averagemarcus/sms-7bit-alphabet');
 const port = process.env.PORT || 9000;
 
 const codes = {};
