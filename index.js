@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const rateLimit = require("express-rate-limit");
 const { encode } = require('@averagemarcus/sms-binary');
 const port = process.env.PORT || 9000;
 
@@ -14,8 +15,15 @@ const nexmo = new Nexmo({
 });
 n.initialize(process.env.NEXMO_API_KEY, process.env.NEXMO_API_SECRET, nexmo.options);
 
+app.enable("trust proxy");
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10
+});
+
 app.use(express.static('public'));
 
+app.use(limiter);
 app.get('/generate/:number', (req, res) => {
   const code = Math.random().toString().replace(/[^0-9]+/g, '').substr(1, 4);
 
